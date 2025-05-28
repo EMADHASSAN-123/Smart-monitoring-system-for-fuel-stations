@@ -1,0 +1,115 @@
+ body {
+      font-family: 'Cairo', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9fbfd;
+      color: #1a1a1a;
+      scroll-behavior: smooth;
+      margin-top: 140px;
+    }
+
+    header {
+      background: linear-gradient(334deg, #000000, #1565c0);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+     header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.2rem;
+    }
+    #findStation{
+    padding:5px;
+    text-decoration: none;
+    color: rgb(120, 195, 241);
+     border-radius: 5px; 
+      border: 2px solid rgb(245, 133, 73); 
+    }
+
+    .cta {
+      margin-top: 20px;
+    }
+
+    .cta a {
+      text-decoration: none;
+      background: #ff9800;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .cta a:hover {
+      background: #fb8c00;
+    }
+
+    section {
+      scroll-margin-top: 100px;
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+      section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #0d47a1;
+    }
+
+    .features, .problems, .solutions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      color: #1976d2;
+      margin-bottom: 10px;
+    }
+
+    .card i {
+      font-size:8vh;
+      margin-bottom: 10px;
+      color: #ff9800;
+      text-align: center;
+    }
+
+    #map {
+      height: 400px;
+      width: 100%;
+      margin-top: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+     .solutions .card .fas{
+      color: #1565c0;
+      text-align: center;
+      font-size: 8vh;
+      padding: 4px;
+    }
+
+     footer {
+      background: #0d47a1;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+

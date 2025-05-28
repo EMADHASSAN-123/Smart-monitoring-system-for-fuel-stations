@@ -1,0 +1,154 @@
+<!-- Page Header -->
+<div class="container py-5">
+    <h1 class="text-center">إدارة المحطات</h1>
+</div>
+
+
+<!-- بحث المحطات -->
+<div class="container py-3">
+    <input type="text" class="form-control" id="stationSearch" placeholder="ابحث عن محطة..." />
+</div>
+
+<!-- Table for Stations -->
+<div class="container">
+    <table class="table table-striped" id="stationsTable">
+        <thead>
+            <tr>
+                <th>اسم المحطة</th>
+                <th>العنوان</th>
+                <th>نوع الوقود</th>
+                <th>مستوى الوقود</th>
+                <th>جودة الوقود</th>
+                <th>أدوات التحكم</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Example Station Row -->
+            <tr>
+                <td>محطة الطاقة</td>
+                <td>الرياض</td>
+                <td>بنزين</td>
+                <td>75%</td>
+                <td>جيد</td>
+                <td>
+                    <button class="btn btn-warning btn-sm">تعديل</button>
+                    <button class="btn btn-danger btn-sm">حذف</button>
+                </td>
+            </tr>
+            <!-- More rows will go here -->
+        </tbody>
+    </table>
+</div>
+
+
+<!-- Table for Stations -->
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>اسم المحطة</th>
+                <th>العنوان</th>
+                <th>نوع الوقود</th>
+                <th>مستوى الوقود</th>
+                <th>جودة الوقود</th>
+                <th>أدوات التحكم</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Example Station Row -->
+            <tr>
+                <td>محطة الطاقة</td>
+                <td>الرياض</td>
+                <td>بنزين</td>
+                <td>75%</td>
+                <td>جيد</td>
+                <td>
+                    <button class="btn btn-warning btn-sm">تعديل</button>
+                    <button class="btn btn-danger btn-sm">حذف</button>
+                </td>
+            </tr>
+            <!-- More rows will go here -->
+        </tbody>
+    </table>
+
+    <!-- Button to Add Station -->
+    <a href="javascript:void(0);" class="btn btn-success">إضافة محطة جديدة</a>
+</div>
+
+
+<!-- Add Station Modal -->
+<div class="modal fade" id="addStationModal" tabindex="-1" aria-labelledby="addStationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addStationModalLabel">إضافة محطة جديدة</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addStationForm">
+                    <div class="mb-3">
+                        <label for="stationName" class="form-label">اسم المحطة</label>
+                        <input type="text" class="form-control" id="stationName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="stationAddress" class="form-label">العنوان</label>
+                        <input type="text" class="form-control" id="stationAddress" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fuelType" class="form-label">نوع الوقود</label>
+                        <select class="form-select" id="fuelType" required>
+                            <option value="بنزين">بنزين</option>
+                            <option value="ديزل">ديزل</option>
+                            <option value="غاز">غاز</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fuelLevel" class="form-label">مستوى الوقود</label>
+                        <input type="number" class="form-control" id="fuelLevel" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fuelQuality" class="form-label">جودة الوقود</label>
+                        <input type="text" class="form-control" id="fuelQuality" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="stationStatus" class="form-label">حالة المحطة</label>
+                        <select class="form-select" id="stationStatus" required>
+                            <option value="نشط">نشط</option>
+                            <option value="غير نشط">غير نشط</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">إضافة المحطة</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer -->
+<div id="footer"></div>
+
+<!-- Scripts -->
+<script src="assets/js/script.js"></script>
+<!-- <script>
+    // Search function for stations
+    document.getElementById("stationSearch").addEventListener("input", function () {
+        const filter = this.value.toLowerCase();
+        const rows = document.querySelectorAll("#stationsTable tbody tr");
+
+        rows.forEach(row => {
+            const cells = row.getElementsByTagName("td");
+            const nameCell = cells[0].textContent.toLowerCase();
+            const addressCell = cells[1].textContent.toLowerCase();
+
+            if (nameCell.includes(filter) || addressCell.includes(filter)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
+</script> -->
+</body>
+
+</html>

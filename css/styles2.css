@@ -1,0 +1,92 @@
+/* ✅ الخط الأساسي للواجهة */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.navbar {
+        padding: 1rem 0;
+        background: linear-gradient(232deg, #000000, #035c86) !important;
+        /* background: linear-gradient(195deg, #1a1a1a, #0d0d0d) !important; */
+    }
+
+.nav-link.active {
+    background: #0d6efd;
+}
+
+.nav-link {
+    padding: 0.5rem 1rem;
+    margin: 0 0.25rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+/* ✅ شريط الفلترة */
+.filter-bar {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* ✅ بطاقات المحطات وتأثير التحويم */
+.station-card .card {
+    transition: transform 0.2s ease;
+}
+
+.station-card .card:hover {
+    transform: scale(1.02);
+}
+
+/* ✅ شارة الازدحام */
+.badge-congestion {
+    font-size: 0.9rem;
+}
+
+/* ✅ تنسيق محتوى البطاقة */
+.card-body {
+    text-align: center;
+    font-size: x-large;
+    font-weight: 700;
+}
+
+/* ✅ مسافة لقائمة الأسعار داخل البطاقة */
+.list-unstyled {
+    padding-left: 40px;
+}
+
+/* ✅ الشريط الجانبي لتعليمات الطريق */
+.route-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 350px;
+    height: 100%;
+    background: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow-y: auto;
+    z-index: 1000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+/* ✅ عرض الشريط الجانبي عند التفعيل */
+.route-sidebar.active {
+    transform: translateX(0);
+}
+
+/* ✅ تنسيق تعليمات الطريق */
+.route-instruction {
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 5px;
+}
+
+/* ✅ زر إغلاق الشريط الجانبي */
+.close-sidebar {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+}

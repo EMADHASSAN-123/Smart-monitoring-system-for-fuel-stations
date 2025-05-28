@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/styles.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .navbar {
+            padding: 1rem 0;
+            background: linear-gradient(232deg, #000000, #035c86) !important;
+            /* background: linear-gradient(195deg, #1a1a1a, #0d0d0d) !important; */
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand img {
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-brand:hover img {
+            transform: rotate(15deg);
+        }
+
+        .nav-link {
+            padding: 0.5rem 1rem;
+            margin: 0 0.25rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link.active {
+            background: #0d6efd;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .navbar-brand {
+                font-size: 1.25rem;
+            }
+
+            .nav-link {
+                padding: 0.5rem;
+                margin: 0.25rem 0;
+            }
+        }
+
+        /* Custom styles for modern sidebar */
+        .sidebar {
+            height: 100vh;
+            width: 280px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background: linear-gradient(195deg, #1a1a1a, #0d0d0d);
+            color: white;
+            padding: 20px;
+            box-shadow: -3px 0 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            margin-top: 10%;
+            border-radius: 50px 0;
+        }
+
+        .sidebar .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .sidebar .nav-link {
+            color: #fff;
+            padding: 12px 15px;
+            margin: 5px 0;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-5px);
+        }
+
+        .sidebar .nav-link.active {
+            background: #0d6efd;
+        }
+
+        .sidebar .nav-link i {
+            margin-left: 10px;
+        }
+
+        .main-content {
+            margin-left: 0;
+            margin-right: 280px;
+            padding: 20px;
+            transition: margin 0.3s ease;
+        }
+
+        .charts-section {
+            margin-top: 70px;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                box-shadow: none;
+            }
+
+            .main-content {
+                margin-right: 0;
+            }
+
+            .sidebar .nav-link:hover {
+                transform: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-cards .col-md-3 {
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .dashboard-cards .col-md-3 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+
+            .charts-section .col-md-6 {
+                flex: 0 0 100%;
+                max-width: 100%;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container-fluid">
+            <!-- Logo and site name -->
+            <a class="navbar-brand" href="#">
+                <img src="LogoSt3.png" alt="Logo" width="100" height="100" class="d-inline-block align-text-top me-2">
+                <!-- <i class="fas fa-gas-pump fa-lg text-warning"></i> -->
+
+            </a>
+
+            <!-- Mobile menu button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navigation menu -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">
+                            <i class="fas fa-home me-1"></i>
+                            الرئيسية
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-chart-line me-1"></i>
+                            التقارير
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-cogs me-1"></i>
+                            الإعدادات
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-user-circle me-1"></i>
+                            الملف الشخصي
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-sign-out-alt me-1"></i>
+                            تسجيل الخروج
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <!-- Navbar -->
+    <!-- <div id="navbar"></div> -->
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Dashboard Header -->
+        <!-- <div class="container py-5">
+            <h1 class="text-center">لوحة التحكم</h1>
+            <p class="text-center text-muted">مرحباً بك في لوحة مراقبة النظام الشاملة</p>
+        </div> -->
+
+        <div id="reports-management" class="container-fluid my-5" style="display: none;">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="mb-4">التقارير والإحصائيات</h2>
+
+                    <!-- Report Filters -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <form id="reportFilters">
+                                <div class="row g-3">
+                                    <div class="col-md-4 col-12">
+                                        <label for="stationSelect" class="form-label">اختر المحطة</label>
+                                        <select class="form-select" id="stationSelect">
+                                            <option value="all">جميع المحطات</option>
+                                            <option value="1">محطة 26</option>
+                                            <option value="2">محطة الوفاء</option>
+                                            <option value="3">محطة القبة</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 col-12">
+                                        <label for="reportType" class="form-label">نوع التقرير</label>
+                                        <select class="form-select" id="reportType">
+                                            <option value="daily">يومي</option>
+                                            <option value="weekly">أسبوعي</option>
+                                            <option value="monthly">شهري</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 col-12">
+                                        <label for="dateRange" class="form-label">الفترة الزمنية</label>
+                                        <input type="text" class="form-control" id="dateRange"
+                                            placeholder="اختر الفترة">
+                                    </div>
+                                </div>
+                                <div class="mt-3 d-flex gap-2">
+                                    <button type="submit" class="btn btn-primary flex-grow-1">
+                                        <i class="fas fa-filter"></i> تطبيق الفلتر
+                                    </button>
+                                    <button type="reset" class="btn btn-secondary flex-grow-1">
+                                        <i class="fas fa-undo"></i> إعادة تعيين
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Cards -->
+                    <div class="row mb-4 g-3">
+                        <div class="col-md-4 col-12">
+                            <div class="card text-white bg-primary h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">إجمالي المبيعات</h5>
+                                    <h2 class="card-text">250,000 لتر</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <div class="card text-white bg-success h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">أعلى محطة مبيعاً</h5>
+                                    <h2 class="card-text">محطة 26</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <div class="card text-white bg-warning h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">متوسط المبيعات اليومية</h5>
+                                    <h2 class="card-text">8,500 لتر</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reports Table -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div
+                                class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3 gap-2">
+                                <h5 class="card-title mb-0">التقارير التفصيلية</h5>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-success flex-grow-1" onclick="exportReport('pdf')">
+                                        <i class="fas fa-file-pdf"></i> تصدير PDF
+                                    </button>
+                                    <button class="btn btn-primary flex-grow-1" onclick="exportReport('word')">
+                                        <i class="fas fa-file-word"></i> تصدير Word
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>المحطة</th>
+                                            <th>نوع الوقود</th>
+                                            <th>الكمية المباعة</th>
+                                            <th>الإيرادات</th>
+                                            <th>التاريخ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>محطة 26</td>
+                                            <td>بنزين</td>
+                                            <td>5,000 لتر</td>
+                                            <td>25,000 ريال</td>
+                                            <td>2023-10-01</td>
+                                        </tr>
+                                        <!-- Add more rows dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="users-management" class="container my-5" style="display: none;">
+            <h2 class="mb-4">إدارة المستخدمين</h2>
+            <div class="mb-4">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                    <i class="fas fa-plus"></i> إضافة مستخدم جديد
+                </button>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>اسم المستخدم</th>
+                            <th>البريد الإلكتروني</th>
+                            <th>الصلاحيات</th>
+                            <th>الحالة</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>عمر امين</td>
+                            <td>omer@gmail.com</td>
+                            <td><span class="badge bg-primary">مدير</span></td>
+                            <td><span class="badge bg-success">نشط</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                    data-bs-target="#editUserModal">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger" onclick="deleteUser(1)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>2</td>
+                            <td>فرسان صادق</td>
+                            <td>foesan@gmail.com</td>
+                            <td><span class="badge bg-primary">محلل</span></td>
+                            <td><span class="badge bg-success">نشط</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                    data-bs-target="#editUserModal">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger" onclick="deleteUser(1)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>3</td>
+                            <td>عماد حسان</td>
+                            <td>emad@gmail.com</td>
+                            <td><span class="badge bg-primary">محرر</span></td>
+                            <td><span class="badge bg-success">غير نشط</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                    data-bs-target="#editUserModal">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger" onclick="deleteUser(1)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <!-- Add more rows dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Add User Modal -->
+        <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addUserModalLabel">إضافة مستخدم جديد</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addUserForm">
+                            <div class="mb-3">
+                                <label for="userName" class="form-label">اسم المستخدم</label>
+                                <input type="text" class="form-control" id="userName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userEmail" class="form-label">البريد الإلكتروني</label>
+                                <input type="email" class="form-control" id="userEmail" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userPassword" class="form-label">كلمة المرور</label>
+                                <input type="password" class="form-control" id="userPassword" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userRole" class="form-label">الصلاحيات</label>
+                                <select class="form-select" id="userRole" required>
+                                    <option value="admin">مدير</option>
+                                    <option value="editor">محرر</option>
+                                    <option value="viewer">مشاهد</option>
+                                    <option value="user">مستخدم عادي</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                        <button type="submit" form="addUserForm" class="btn btn-primary">حفظ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit User Modal -->
+        <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editUserModalLabel">تعديل المستخدم</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editUserForm">
+                            <div class="mb-3">
+                                <label for="editUserName" class="form-label">اسم المستخدم</label>
+                                <input type="text" class="form-control" id="editUserName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editUserEmail" class="form-label">البريد الإلكتروني</label>
+                                <input type="email" class="form-control" id="editUserEmail" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editUserRole" class="form-label">الصلاحيات</label>
+                                <select class="form-select" id="editUserRole" required>
+                                    <option value="admin">مدير</option>
+                                    <option value="editor">محرر</option>
+                                    <option value="viewer">مشاهد</option>
+                                    <option value="user">مستخدم عادي</option>
+                                </select>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="editUserStatus">
+                                <label class="form-check-label" for="editUserStatus">نشط</label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                        <button type="submit" form="editUserForm" class="btn btn-primary">حفظ التعديلات</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Cards -->
+
+        <div id="dashboard-management" class="container my-5">
+            <div class="container">
+                <div class="row text-center g-4 dashboard-cards">
+                    <div class="col-md-3">
+                        <div class="card bg-primary text-white">
+                            <div class="card-body">
+                                <h5>عدد المحطات</h5>
+                                <h2 id="stationsCount">3</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-success text-white">
+                            <div class="card-body">
+                                <h5>كمية الوقود الكلية</h5>
+                                <h2 id="fuelTotal">19000 لتر</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-warning text-dark">
+                            <div class="card-body">
+                                <h5>عدد المستخدمين</h5>
+                                <h2 id="usersCount">8</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-danger text-white">
+                            <div class="card-body">
+                                <h5>محطات منخفضة الوقود</h5>
+                                <h2 id="lowFuelStations">1</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="charts-section">
+                <div class="row">
+                    <div class="col-md-6">
+                        <canvas id="fuelTypeChart"></canvas>
+                    </div>
+                    <div class="col-md-6">
+                        <canvas id="fuelLevelChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Charts Section -->
+
+        <div id="stations-management" class="container my-5" style="display: none;">
+            <h2 class="mb-4">إدارة المحطات</h2>
+            <div class="mb-4">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStationModal">
+                    <i class="fas fa-plus"></i> إضافة محطة جديدة
+                </button>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>اسم المحطة</th>
+                            <th>الموقع</th>
+                            <th>سعة الوقود</th>
+                            <th>الوقود المتوفر</th>
+                            <th>الحالة</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>محطة الرياض</td>
+                            <td>الرياض، السعودية</td>
+                            <td>50000 لتر</td>
+                            <td>25000 لتر</td>
+                            <td><span class="badge bg-success">نشطة</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                    data-bs-target="#editStationModal">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger" onclick="deleteStation(1)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <!-- Add more rows dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Add Station Modal -->
+        <div class="modal fade" id="addStationModal" tabindex="-1" aria-labelledby="addStationModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addStationModalLabel">إضافة محطة جديدة</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addStationForm">
+                            <div class="mb-3">
+                                <label for="stationName" class="form-label">اسم المحطة</label>
+                                <input type="text" class="form-control" id="stationName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="stationLocation" class="form-label">الموقع</label>
+                                <input type="text" class="form-control" id="stationLocation" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="stationCapacity" class="form-label">سعة الوقود</label>
+                                <input type="number" class="form-control" id="stationCapacity" required>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                        <button type="submit" form="addStationForm" class="btn btn-primary">حفظ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Station Modal -->
+        <div class="modal fade" id="editStationModal" tabindex="-1" aria-labelledby="editStationModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editStationModalLabel">تعديل المحطة</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editStationForm">
+                            <div class="mb-3">
+                                <label for="editStationName" class="form-label">اسم المحطة</label>
+                                <input type="text" class="form-control" id="editStationName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editStationLocation" class="form-label">الموقع</label>
+                                <input type="text" class="form-control" id="editStationLocation" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editStationCapacity" class="form-label">سعة الوقود</label>
+                                <input type="number" class="form-control" id="editStationCapacity" required>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                        <button type="submit" form="editStationForm" class="btn btn-primary">حفظ التعديلات</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <h3>نظام إدارة الوقود</h3>
+        </div>
+        <nav class="nav flex-column">
+            <a class="nav-link active" href="#dashboard">
+                <i class="fas fa-tachometer-alt"></i>
+                لوحة التحكم
+            </a>
+            <a class="nav-link" href="#stations">
+                <i class="fas fa-gas-pump"></i>
+                إدارة المحطات
+            </a>
+            <a class="nav-link" href="#fuel">
+                <i class="fas fa-oil-can"></i>
+                إدارة الوقود
+            </a>
+            <a class="nav-link" href="#users">
+                <i class="fas fa-users"></i>
+                إدارة المستخدمين
+            </a>
+            <a class="nav-link" href="#reports">
+                <i class="fas fa-chart-line"></i>
+                التقارير والإحصائيات
+            </a>
+            <a class="nav-link" href="#settings">
+                <i class="fas fa-cog"></i>
+                الإعدادات
+            </a>
+        </nav>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/script.js"></script>
+
+    <script>
+
+        // Chart 1: أنواع الوقود
+        const fuelTypeChart = new Chart(document.getElementById("fuelTypeChart"), {
+            type: 'doughnut',
+            data: {
+                labels: ["بنزين", "ديزل", "غاز"],
+                datasets: [{
+                    data: [60, 25, 15],
+                    backgroundColor: ["#0d6efd", "#198754", "#ffc107"]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'توزيع أنواع الوقود'
+                    }
+                }
+            }
+        });
+
+        // Chart 2: مستوى الوقود بالمحطات
+        const fuelLevelChart = new Chart(document.getElementById("fuelLevelChart"), {
+            type: 'bar',
+            data: {
+                labels: ["محطة الوفاء", "محطة 26", "محطة القبة"],
+                datasets: [{
+                    label: 'مستوى الوقود (%)',
+                    data: [75, 50, 60],
+                    backgroundColor: '#0d6efd'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'مستوى الوقود في المحطات'
+                    }
+                }
+            }
+        });
+    </script>
+    <script>
+        // Function to show/hide sections based on menu clicks
+        function showSection(sectionId) {
+            // Hide all management sections
+            document.querySelectorAll('[id$="-management"]').forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Show the selected section
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.style.display = 'block';
+            }
+        }
+
+        // Add event listeners to menu items
+        // Add event listeners to menu items
+        document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = this.getAttribute('href').substring(1);
+                showSection(target + '-management');
+
+                // Update active class in sidebar
+                document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+
+        // Function to delete a station
+        // Function to delete a station
+        function deleteStation(stationId) {
+            if (confirm('هل أنت متأكد من حذف هذه المحطة؟')) {
+                // Add your delete logic here
+                console.log('Deleting station with ID:', stationId);
+            }
+        }
+
+
+        // Show dashboard by default
+        showSection('dashboard-management');
+        document.querySelector('.sidebar .nav-link[href="#dashboard"]').classList.add('active');
+    </script>
+
+    <script>
+        // Function to export reports
+        function exportReport(format) {
+            const station = document.getElementById('stationSelect').value;
+            const reportType = document.getElementById('reportType').value;
+            const dateRange = document.getElementById('dateRange').value;
+
+            // Add your export logic here
+            console.log(`Exporting ${format} report for station ${station}, type ${reportType}, date range ${dateRange}`);
+            alert(`سيتم تصدير التقرير بصيغة ${format.toUpperCase()}`);
+        }
+
+        // Initialize date range picker
+        $(document).ready(function () {
+            $('#dateRange').daterangepicker({
+                locale: {
+                    format: 'YYYY-MM-DD',
+                    separator: ' - ',
+                    applyLabel: 'تطبيق',
+                    cancelLabel: 'إلغاء',
+                    customRangeLabel: 'مخصص',
+                    daysOfWeek: ['أحد', 'اثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة', 'سبت'],
+                    monthNames: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر']
+                }
+            });
+        });
+    </script>
+    <script>
+        // Function to delete a user
+        function deleteUser(userId) {
+            if (confirm('هل أنت متأكد من حذف هذا المستخدم؟')) {
+                // Add your delete logic here
+                console.log('Deleting user with ID:', userId);
+            }
+        }
+    </script>
+
+    <!-- Add these CDN links in the head section -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+</body>
+
+</html>

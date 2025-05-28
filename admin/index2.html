@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نظام الرصد الذكي لمحطات الوقود - تعز</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9fbfd;
+      color: #1a1a1a;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background: linear-gradient(to left, #0d47a1, #1976d2);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.2rem;
+    }
+
+    .cta {
+      margin-top: 20px;
+    }
+
+    .cta a {
+      text-decoration: none;
+      background: #ff9800;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .cta a:hover {
+      background: #fb8c00;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #0d47a1;
+    }
+
+    .features, .problems, .solutions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      color: #1976d2;
+      margin-bottom: 10px;
+    }
+
+    .card i {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #ff9800;
+    }
+
+    #map {
+      height: 400px;
+      width: 100%;
+      margin-top: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    footer {
+      background: #0d47a1;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <header data-aos="fade-down">
+    <h1>🚀 نظام الرصد الذكي لمحطات الوقود</h1>
+    <p>حل ذكي لمراقبة توافر الوقود والازدحام وجودة المشتقات - لحظيًا</p>
+  </header>
+
+  <section id="intro" data-aos="fade-up">
+    <h2>لماذا نحتاج هذا النظام؟</h2>
+    <p>
+      في ظل المعاناة اليومية في قطاع الوقود بتعز، من انعدام الرقابة والتلاعب بالأسعار وجودة الوقود، يأتي هذا النظام الذكي ليقدم حلاً رقميًا مبتكرًا باستخدام الذكاء الاصطناعي وإنترنت الأشياء، لتحقيق عدالة الوصول وتحسين الكفاءة التشغيلية.
+    </p>
+  </section>
+
+  <section id="problems" data-aos="fade-up">
+    <h2>المشاكل التي يعالجها النظام</h2>
+    <div class="problems">
+      <div class="card">
+        <i class="fas fa-tools"></i>
+        <h3>إدارة المخزون يدويًا</h3>
+        <p>النظام يستخدم مستشعرات دقيقة لقياس الكميات بشكل لحظي وموثوق.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-flask"></i>
+        <h3>تلاعب بجودة الوقود</h3>
+        <p>مراقبة جودة الوقود واكتشاف أي خلط أو تلوث آنيًا.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-route"></i>
+        <h3>صعوبة في تحديد المحطة الأنسب</h3>
+        <p>يعرض النظام المحطات حسب القرب، التوفر، والازدحام.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-shield-alt"></i>
+        <h3>غياب الرقابة والشفافية</h3>
+        <p>لوحة تحكم مركزية لشركة النفط تضمن المراقبة الفعالة.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="solutions" data-aos="fade-up">
+    <h2>كيف يعالج النظام هذه التحديات؟</h2>
+    <div class="solutions">
+      <div class="card">
+        <i class="fas fa-microchip"></i>
+        <h3>مستشعرات ذكية في الخزانات</h3>
+        <p>يتم تثبيت مستشعرات السعة والضغط داخل خزانات الوقود، لقياس كمية الوقود بشكل آني ودقيق وإرسال البيانات مباشرة إلى لوحة التحكم.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-vial"></i>
+        <h3>تحليل جودة الوقود</h3>
+        <p>تُستخدم مستشعرات الجودة للكشف عن وجود الماء أو المواد الغريبة في الوقود، ويتم تنبيه الإدارة فورًا لاتخاذ إجراء سريع.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-map-marked-alt"></i>
+        <h3>اقتراح المحطة المثلى</h3>
+        <p>يقوم النظام بحساب المسافة والازدحام وتوافر الوقود لاقتراح أفضل محطة بناءً على موقع المستخدم.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-chart-line"></i>
+        <h3>لوحة تحكم مركزية</h3>
+        <p>تعرض كل المحطات في واجهة واحدة مع تفاصيل الكمية والجودة والازدحام، مما يُمكّن الجهات الرسمية من التدخل الفوري واتخاذ قرارات دقيقة.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" data-aos="fade-up">
+    <h2>مميزات النظام</h2>
+    <div class="features">
+      <div class="card">
+        <h3>تحديث آني لحالة المحطات</h3>
+        <p>عرض مباشر عبر الخريطة لحالة كل محطة.</p>
+      </div>
+      <div class="card">
+        <h3>استخدام الذكاء الاصطناعي</h3>
+        <p>لتحليل البيانات وتقديم أفضل اقتراح للمستخدم.</p>
+      </div>
+      <div class="card">
+        <h3>مراقبة جودة الوقود</h3>
+        <p>مستشعرات تقيس النقاء وتكشف الخلط.</p>
+      </div>
+      <div class="card">
+        <h3>لوحة تحكم لشركة النفط</h3>
+        <p>رصد مركزي لحالة الوقود والازدحام.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="map-section" data-aos="fade-up">
+    <h2>خريطة تفاعلية للمحطات</h2>
+    <p>تعرض المحطات ومواقعها وحالتها اللحظية مباشرة على الخريطة</p>
+    <div id="map"></div>
+  </section>
+
+  <section id="cta" data-aos="zoom-in">
+    <h2>هل أنت جاهز لتجربة الحل؟</h2>
+    <p>سواء كنت مواطنًا أو مسؤولاً في شركة النفط – هذا النظام صُمم لأجلك.</p>
+    <div class="cta">
+      <a href="#">اطلب تجربة مجانية الآن</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 نظام الرصد الذكي لمحطات الوقود - تعز</p>
+  </footer>
+
+  <script>
+    AOS.init({ duration: 1000 });
+
+    const map = L.map('map').setView([13.577, 44.017], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    L.marker([13.577, 44.017])
+      .addTo(map)
+      .bindPopup('محطة النور - ديزل متوفر، ازدحام متوسط')
+      .openPopup();
+  </script>
+</body>
+
+</html>

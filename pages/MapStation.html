@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>أقرب محطات الوقود</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Leaflet CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <!-- Routing Machine -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+  <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" /> -->
+  <!-- Font Awesome for icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+
+    }
+
+    header {
+      /* background: linear-gradient(135deg, #0d47a1, #1565c0); */
+      background: linear-gradient(334deg, #000000, #1565c0);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+     #findStation{
+    padding:5px;
+    text-decoration: none;
+    color: rgb(120, 195, 241);
+     border-radius: 5px; 
+      border: 2px solid rgb(245, 133, 73); 
+    }
+
+    .contain {
+      margin-top: 150px;
+      padding: 2%;
+      display: flex;
+      flex-direction: row;
+      height: 70vh;
+      background-color: #f9f9f9;
+    }
+
+    #map {
+      flex: 3;
+      height: 80%;
+      padding: 3%;
+      margin: auto 40px;
+      border-radius: 5px;
+    }
+
+    #sidebar {
+      flex: 1;
+      background: #fff;
+      padding: 15px;
+      overflow-y: auto;
+      border-left: 2px solid #ddd;
+    }
+
+    h2 {
+      font-size: 1.4em;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .station-card {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 10px;
+      background: #fafafa;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .station-card h3 {
+      margin: 0 0 5px;
+      font-size: 1.1em;
+      color: #2c3e50;
+    }
+
+    .station-card p {
+      margin: 5px 0;
+      font-size: 0.9em;
+      color: #555;
+    }
+
+    .station-card button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    .station-card button:hover {
+      background: #0056b3;
+    }
+
+    footer {
+      background: #0d47a1;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    @media (max-width: 768px) {
+
+      .contain {
+        flex-direction: column;
+        padding: 1%;
+      }
+
+      #map {
+        flex: 6;
+        margin: 2%;
+        height: 45vh;
+        padding: 2%;
+
+      }
+
+      #sidebar {
+        flex: 5;
+        height: 48vh;
+        border-left: none;
+        border-top: 2px solid #ddd;
+        padding: 10px;
+      }
+
+      .station-card {
+        padding: 8px;
+      }
+
+      .station-card h3 {
+        font-size: 1em;
+      }
+
+      .station-card p {
+        font-size: 0.85em;
+      }
+
+      .station-card button {
+        padding: 4px 8px;
+        font-size: 0.8em;
+      }
+
+    }
+
+    @media (max-width: 480px) {
+      .contain {
+        margin-top: 100px;
+      }
+
+      #map {
+        height: 40vh;
+        margin: 1%;
+        padding: 1%;
+
+      }
+
+      #sidebar {
+        height: 55vh;
+        font-size: 0.9em;
+        margin: 2px;
+      }
+
+      .station-card {
+        border-radius: 8px;
+      }
+
+      .station-card button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header id="header" class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top py-2"></header>
+  <section class="contain">
+    <div id="map"></div>
+    <div id="sidebar">
+      <h2><i class="fas fa-gas-pump"></i> أقرب المحطات</h2>
+      <div id="stationList">جاري التحميل...</div>
+    </div>
+  </section>
+
+
+  <footer>
+    <p>© 2025 نظام الرصد الذكي لمحطات الوقود - تعز</p>
+  </footer>
+  <script>
+    fetch('../components/header.html').then(res => res.text()).then(html => document.getElementById('header').innerHTML = html);
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/MapStation.js"></script>
+ 
+</body>
+
+</html>

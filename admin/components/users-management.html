@@ -1,0 +1,91 @@
+<!-- إدارة المستخدمين -->
+<div class="container py-5">
+    <h1 class="text-center">إدارة المستخدمين</h1>
+</div>
+
+<!-- البحث -->
+<div class="container py-3">
+    <input type="text" class="form-control" id="userSearch" placeholder="ابحث عن موظف..." />
+</div>
+
+<!-- الجدول -->
+<div class="container">
+    <table class="table table-striped" id="usersTable">
+        <thead>
+            <tr>
+                <th>اسم الموظف</th>
+                <th>البريد الإلكتروني</th>
+                <th>الدور</th>
+                <th>حالة الحساب</th>
+                <th>أدوات التحكم</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- صف مثال -->
+            <tr>
+                <td>محمد علي</td>
+                <td>mohamed@gmail.com</td>
+                <td>مشرف</td>
+                <td>نشط</td>
+                <td>
+                    <button class="btn btn-warning btn-sm">تعديل</button>
+                    <button class="btn btn-danger btn-sm">حذف</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td>عماد حسان</td>
+                <td>emad@gmail.com</td>
+                <td>مشرف</td>
+                <td>نشط</td>
+                <td>
+                    <button class="btn btn-warning btn-sm">تعديل</button>
+                    <button class="btn btn-danger btn-sm">حذف</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- زر إضافة مستخدم -->
+    <button id="openAddUserModal" class="btn btn-success">إضافة موظف جديد</button>
+</div>
+
+<!-- مودال إضافة موظف -->
+<div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addUserModalLabel">إضافة موظف جديد</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addUserForm">
+                    <div class="mb-3">
+                        <label for="userName" class="form-label">اسم الموظف</label>
+                        <input type="text" class="form-control" id="userName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="userEmail" class="form-label">البريد الإلكتروني</label>
+                        <input type="email" class="form-control" id="userEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="userRole" class="form-label">الدور</label>
+                        <select class="form-select" id="userRole" required>
+                            <option value="مشرف">مشرف</option>
+                            <option value="موظف">موظف</option>
+                            <option value="مراقب">مراقب</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="userStatus" class="form-label">حالة الحساب</label>
+                        <select class="form-select" id="userStatus" required>
+                            <option value="نشط">نشط</option>
+                            <option value="غير نشط">غير نشط</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">إضافة الموظف</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

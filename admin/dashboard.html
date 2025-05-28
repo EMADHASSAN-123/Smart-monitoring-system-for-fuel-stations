@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>لوحة التحكم</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="assets/css/dashboard.css" rel="stylesheet" />
+
+
+</head>
+
+<body style="overflow: hidden;">
+    <div id="navbar-container"></div>
+    <div class="d-flex">
+        <div id="sidebar-container" class="flex-shrink-0"></div>
+        <div class="main-content flex-grow-1 p-3 overflow-auto" id="main-content-area" style="height: 100vh;">
+            <div id="dashboard-management" class="container my-5">
+                <div class="container">
+                    <div class="row text-center g-4 dashboard-cards">
+                        <div class="col-md-3">
+                            <div class="card bg-primary text-white">
+                                <div class="card-body">
+                                    <h5>عدد المحطات</h5>
+                                    <h2 id="stationsCount">3</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card bg-success text-white">
+                                <div class="card-body">
+                                    <h5>كمية الوقود الكلية</h5>
+                                    <h2 id="fuelTotal">19000 لتر</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card bg-warning text-dark">
+                                <div class="card-body">
+                                    <h5>عدد المستخدمين</h5>
+                                    <h2 id="usersCount">8</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card bg-danger text-white">
+                                <div class="card-body">
+                                    <h5>محطات منخفضة الوقود</h5>
+                                    <h2 id="lowFuelStations">1</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="charts-section">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <canvas id="fuelTypeChart"></canvas>
+                        </div>
+                        <div class="col-md-6">
+                            <canvas id="fuelLevelChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="footer-container"></div>
+    
+    <script>
+        fetch('components/navbar.html').then(res => res.text()).then(html => document.getElementById('navbar-container').innerHTML = html);
+        fetch('components/sidebar.html').then(res => res.text()).then(html => document.getElementById('sidebar-container').innerHTML = html);
+        fetch('components/footer.html').then(res => res.text()).then(html => document.getElementById('footer-container').innerHTML = html);
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment/min/moment.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+        <script src="assets/js/users.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/charts.js" defer></script>
+
+</body>
+
+</html>

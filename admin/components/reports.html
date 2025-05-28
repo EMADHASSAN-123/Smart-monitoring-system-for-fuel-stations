@@ -1,0 +1,119 @@
+<div id="reports-management" class="container-fluid my-5" ">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="mb-4">التقارير والإحصائيات</h2>
+
+                    <!-- Report Filters -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <form id="reportFilters">
+                                <div class="row g-3">
+                                    <div class="col-md-4 col-12">
+                                        <label for="stationSelect" class="form-label">اختر المحطة</label>
+                                        <select class="form-select" id="stationSelect">
+                                            <option value="all">جميع المحطات</option>
+                                            <option value="1">محطة 26</option>
+                                            <option value="2">محطة الوفاء</option>
+                                            <option value="3">محطة القبة</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 col-12">
+                                        <label for="reportType" class="form-label">نوع التقرير</label>
+                                        <select class="form-select" id="reportType">
+                                            <option value="daily">يومي</option>
+                                            <option value="weekly">أسبوعي</option>
+                                            <option value="monthly">شهري</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 col-12">
+                                        <label for="dateRange" class="form-label">الفترة الزمنية</label>
+                                        <input type="text" class="form-control" id="dateRange"
+                                            placeholder="اختر الفترة">
+                                    </div>
+                                </div>
+                                <div class="mt-3 d-flex gap-2">
+                                    <button type="submit" class="btn btn-primary flex-grow-1">
+                                        <i class="fas fa-filter"></i> تطبيق الفلتر
+                                    </button>
+                                    <button type="reset" class="btn btn-secondary flex-grow-1">
+                                        <i class="fas fa-undo"></i> إعادة تعيين
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Cards -->
+                    <div class="row mb-4 g-3">
+                        <div class="col-md-4 col-12">
+                            <div class="card text-white bg-primary h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">إجمالي المبيعات</h5>
+                                    <h2 class="card-text">250,000 لتر</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <div class="card text-white bg-success h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">أعلى محطة مبيعاً</h5>
+                                    <h2 class="card-text">محطة 26</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <div class="card text-white bg-warning h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">متوسط المبيعات اليومية</h5>
+                                    <h2 class="card-text">8,500 لتر</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reports Table -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div
+                                class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3 gap-2">
+                                <h5 class="card-title mb-0">التقارير التفصيلية</h5>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-success flex-grow-1" onclick="exportReport('pdf')">
+                                        <i class="fas fa-file-pdf"></i> تصدير PDF
+                                    </button>
+                                    <button class="btn btn-primary flex-grow-1" onclick="exportReport('word')">
+                                        <i class="fas fa-file-word"></i> تصدير Word
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>المحطة</th>
+                                            <th>نوع الوقود</th>
+                                            <th>الكمية المباعة</th>
+                                            <th>الإيرادات</th>
+                                            <th>التاريخ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>محطة 26</td>
+                                            <td>بنزين</td>
+                                            <td>5,000 لتر</td>
+                                            <td>25,000 ريال</td>
+                                            <td>2023-10-01</td>
+                                        </tr>
+                                        <!-- Add more rows dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>

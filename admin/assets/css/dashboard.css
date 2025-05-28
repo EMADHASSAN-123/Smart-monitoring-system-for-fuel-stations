@@ -1,0 +1,141 @@
+/* ✅ تنسيقات شريط التنقل (Navbar) */
+.navbar {
+  padding: 1rem 0;
+  background: linear-gradient(232deg, #000000, #035c86) !important;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand img {
+  transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover img {
+  transform: rotate(15deg);
+}
+
+.nav-link {
+  padding: 0.5rem 1rem;
+  margin: 0 0.25rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link.active {
+  background: #0d6efd;
+}
+
+/* ✅ Responsive Navbar */
+@media (max-width: 992px) {
+  .navbar-brand {
+    font-size: 1.25rem;
+  }
+
+  .nav-link {
+    padding: 0.5rem;
+    margin: 0.25rem 0;
+  }
+}
+
+/* ✅ القائمة الجانبية (Sidebar) */
+.sidebar {
+  height: 100vh;
+  width: 280px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: linear-gradient(195deg, #1a1a1a, #0d0d0d);
+  color: white;
+  padding: 20px;
+  box-shadow: -3px 0 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  margin-top: 10%;
+  border-radius: 50px 0;
+}
+
+.sidebar .logo {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.sidebar .nav-link {
+  color: #fff;
+  padding: 12px 15px;
+  margin: 5px 0;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.sidebar .nav-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(-5px);
+}
+
+.sidebar .nav-link.active {
+  background: #0d6efd;
+}
+
+.sidebar .nav-link i {
+  margin-left: 10px;
+}
+
+/* ✅ محتوى الصفحة الرئيسي */
+.main-content {
+  margin-left: 0;
+  margin-right: 280px;
+  padding: 20px;
+  transition: margin 0.3s ease;
+}
+
+/* ✅ القسم الخاص بالرسوم البيانية */
+.charts-section {
+  margin-top: 70px;
+}
+
+/* ✅ استجابة التصميم للعرض الصغير */
+@media (max-width: 992px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    box-shadow: none;
+  }
+
+  .main-content {
+    margin-right: 0;
+  }
+
+  .sidebar .nav-link:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-cards .col-md-3 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 576px) {
+  .dashboard-cards .col-md-3 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .charts-section .col-md-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 30px;
+  }
+}
