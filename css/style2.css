@@ -6,6 +6,8 @@
       color: #1a1a1a;
       scroll-behavior: smooth;
       margin-top: 140px;
+        overflow-x: hidden;
+
     }
 
     header {
