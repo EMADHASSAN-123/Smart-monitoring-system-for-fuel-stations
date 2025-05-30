@@ -23,6 +23,21 @@
     header p {
       font-size: 1.2rem;
     }
+    #containerimghero{
+      width: 100%;
+       max-height: 640px;
+       margin: 5px auto;
+    }
+
+    #imghero{
+      height: 563px;
+      width: 90%;
+    }
+
+
+
+
+
     #findStation{
     padding:5px;
     text-decoration: none;
@@ -115,3 +130,15 @@
       padding: 20px;
     }
 
+@media (max-width: 768px) {
+            #containerimghero{
+      width: 100%;
+       max-height: 440px;
+    }
+
+    #imghero{
+      height: 333px;
+      width: 90%;
+    }
+
+        }
